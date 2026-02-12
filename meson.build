@@ -18,4 +18,13 @@ exe = executable(
     include_directories : incdir
 )
 
-test('lexer tokens test', exe, args : files('tests/lexer/tokens.nitro'))
+lexer_fail_tests = []
+lexer_pass_tests = [ 'tokens' ]
+
+foreach t : lexer_fail_tests
+    test('lexer \'' + t + '\' test (fail)', exe, args : files('tests/lexer/fail/' / (t + '.nitro')))
+endforeach
+
+foreach t : lexer_pass_tests
+    test('lexer \'' + t + '\' test (pass)', exe, args : files('tests/lexer/pass/' / (t + '.nitro')))
+endforeach
